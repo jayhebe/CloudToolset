@@ -1,0 +1,40 @@
+{% extends "common/base.html" %}
+{% block panel_heading %}
+KeyVaults Secret Search
+{% endblock %}
+{% block panel_body%}
+{% if secret_value %}
+<div class="row">
+    <div class="panel-body text-center">
+        {{ secret_value }}
+    </div>
+</div>
+{% endif %}
+<form action="{{ url_for('azure.azure_keyvaults') }}" method="post">
+    <div class="form-group">
+        <label for="environment">Environment</label>
+        <select class="form-control" name="environment" id="environment">
+            <option value="AzurePublicCloud">Azure Global</option>
+            <option value="AzureChinaCloud">Azure China</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="keyvaults_name">KeyVaults Name</label>
+        <input type="text" class="form-control" id="keyvaults_name" name="keyvaults_name" placeholder="KeyVaults Name">
+    </div>
+    <div class="form-group">
+        <label for="secret_name">Secret Name</label>
+        <input type="text" class="form-control" id="secret_name" name="secret_name" placeholder="Secret Name">
+    </div>
+    <div class="form-group">
+        <label for="client_id">Client ID</label>
+        <input type="text" class="form-control" id="client_id" name="client_id" placeholder="Client ID">
+    </div>
+    <div class="form-group">
+        <label for="client_secret">Client Secret</label>
+        <input type="password" class="form-control" id="client_secret" name="client_secret" placeholder="Client Secret">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "common/base.html" %}
+{% block panel_heading %}
+Registration
+{% endblock %}
+{% block panel_body%}
+<form>
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" class="form-control" id="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="cfmpassword">Confirm Password</label>
+        <input type="password" class="form-control" id="cfmpassword" placeholder="Confirm Password">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{% endblock %}
