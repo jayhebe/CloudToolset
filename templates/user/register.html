@@ -3,20 +3,26 @@
 Registration
 {% endblock %}
 {% block panel_body%}
-<form>
+<form action="{{ url_for('user.user_register') }}", method="post">
     <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" class="form-control" id="email" placeholder="Email">
+        <label class="control-label" for="email">Email address</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+        <span id="email_msg"></span>
     </div>
     <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password">
+        <label class="control-label" for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        <span id="password_msg"></span>
     </div>
     <div class="form-group">
-        <label for="cfmpassword">Confirm Password</label>
-        <input type="password" class="form-control" id="cfmpassword" placeholder="Confirm Password">
+        <label class="control-label" for="cfmpassword">Confirm Password</label>
+        <input type="password" class="form-control" id="cfmpassword" name="cfmpassword" placeholder="Confirm Password">
+        <span id="cfmpassword_msg"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='js/validation.js') }}"></script>
 {% endblock %}

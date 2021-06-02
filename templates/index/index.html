@@ -1,4 +1,7 @@
 {% extends "common/base.html" %}
 {% block panel_body %}
+{% if msg %}
+<p>{{ msg }}</p>
+{% endif %}
 Welcome to Cloud Toolset!
 {% endblock %}
