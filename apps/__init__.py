@@ -1,5 +1,6 @@
 from flask import Flask
 
+from apps.auth.view_auth import bp_auth
 from apps.azure.view_keyvaults import bp_azure
 from apps.index.view_index import bp_index
 from apps.user.view_user import bp_user
@@ -12,6 +13,7 @@ def create_app():
     app.config.from_object(settings.DevelopmentConfig)
 
     app.register_blueprint(bp_index)
+    app.register_blueprint(bp_auth)
     app.register_blueprint(bp_user)
     app.register_blueprint(bp_azure)
 

@@ -3,5 +3,9 @@
 {% if msg %}
 <p>{{ msg }}</p>
 {% endif %}
+{% if g.user %}
 Welcome to Cloud Toolset!
+{% else %}
+Welcome to Cloud Toolset! Please sign in to use any feature.
+{% endif %}
 {% endblock %}

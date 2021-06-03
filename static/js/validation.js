@@ -25,7 +25,7 @@ $("#email").blur(function() {
     let email_span = $(this).next("span");
     let msg;
     if (validate_email(email)) {
-        $.get("/user/check_email", {email: email}, function (data) {
+        $.get("/auth/check_email", {email: email}, function (data) {
             if (data.exists === 1) {
                 msg = "The email is already in use.";
                 not_pass_valication(email_div, email_span, msg);

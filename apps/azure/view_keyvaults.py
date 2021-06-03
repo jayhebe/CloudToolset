@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, current_app
 
+from apps.auth.view_auth import auth_login_required
 from apps.azure.utils.azure_credential import get_credential
 from apps.azure.utils.azure_keyvaults import get_kv_secret
 
@@ -7,6 +8,7 @@ bp_azure = Blueprint("azure", __name__, url_prefix="/azure")
 
 
 @bp_azure.route("/keyvaults", methods=["GET", "POST"])
+@auth_login_required
 def azure_keyvaults():
     if request.method == "POST":
         tenant_id = current_app.config["TENANT_ID"]

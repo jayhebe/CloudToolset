@@ -3,7 +3,10 @@
 Login
 {% endblock %}
 {% block panel_body%}
-<form>
+{% if msg %}
+<p>{{ msg }}</p>
+{% endif %}
+<form action="{{ url_for('auth.auth_login') }}", method="post">
     <div class="form-group">
         <label for="email">Email address</label>
         <input type="text" class="form-control" id="email" name="email" placeholder="Email">
