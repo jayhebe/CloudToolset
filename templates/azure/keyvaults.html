@@ -1,4 +1,4 @@
-{% extends "common/base.html" %}
+{% extends "base.html" %}
 {% block panel_heading %}
 KeyVaults Secret Search
 {% endblock %}
@@ -10,12 +10,13 @@ KeyVaults Secret Search
     </div>
 </div>
 {% endif %}
-<form action="{{ url_for('azure.azure_keyvaults') }}" method="post">
+<form action="{{ url_for('keyvaults.azure_keyvaults') }}" method="post">
     <div class="form-group">
         <label for="environment">Environment</label>
         <select class="form-control" name="environment" id="environment">
-            <option value="AzurePublicCloud">Azure Global</option>
-            <option value="AzureChinaCloud">Azure China</option>
+            {% for env in envs %}
+                <option value="{{ env.env_id }}">{{ env.env_display_name }}</option>
+            {% endfor %}
         </select>
     </div>
     <div class="form-group">

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block panel_heading %}
+Get My IP Address
+{% endblock %}
+{% block panel_body%}
+{% if ip_address %}
+Your IP address is: {{ ip_address }}
+{% endif %}
+{% endblock %}

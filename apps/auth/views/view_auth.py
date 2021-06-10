@@ -4,7 +4,7 @@ from flask import Blueprint, request, render_template, jsonify, session, g, url_
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
-from apps.user.model_user import User
+from apps.user.models.model_user import User
 from exts import db
 
 bp_auth = Blueprint("auth", __name__, url_prefix="/auth")

@@ -7,7 +7,7 @@
     </title>
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -28,13 +28,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Azure <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('azure.azure_keyvaults') }}">KeyVaults Secret Search</a></li>
+                        <li><a href="{{ url_for('keyvaults.azure_keyvaults') }}">KeyVaults Secret Search</a></li>
                         <li><a href="#">KeyVaults Secret Management</a></li>
                         <li><a href="#">Service Principal Management</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Resource Deployment</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Subscription Management</a></li>
+                        <li><a href="{{ url_for('subscription.azure_subscription') }}">Subscription Management</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -61,6 +61,14 @@
                         <li><a href="#">Separated link</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Common Tools <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('common.common_generate_password') }}">Generate Password</a></li>
+                        <li><a href="{{ url_for('common.common_get_my_ip') }}">My IP Address</a></li>
                     </ul>
                 </li>
             </ul>
@@ -103,7 +111,12 @@
     </div>
 </div>
 {% endblock %}
-<footer class="text-center">&copy; 2021</footer>
+<footer class="text-center">
+    <img alt="Walking Totoro" class="totoro" src="{{ url_for('static', filename='images/totoro1.gif') }}"
+         title="to~to~ro~">
+    <small>&copy; 2021</small>
+</footer>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
