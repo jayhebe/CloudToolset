@@ -105,7 +105,21 @@
                 {% block panel_heading %}{% endblock %}
             </div>
             <div class="panel-body">
-                {% block panel_body %}{% endblock %}
+                {% block messages %}
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="row">
+                            {% for message in messages %}
+                            <div class="panel-body text-center">
+                                {{ message }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    {% endwith %}
+                {% endblock %}
+                {% block panel_body %}
+                {% endblock %}
             </div>
         </div>
     </div>

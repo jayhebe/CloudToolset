@@ -3,17 +3,6 @@
 Subscription Management
 {% endblock %}
 {% block panel_body%}
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-<div class="row">
-    {% for message in messages %}
-    <div class="panel-body text-center">
-        {{ message }}
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
-{% endwith %}
 <form action="{{ url_for('subscription.azure_subscription') }}" method="post">
     <div class="form-group">
         <label for="environment">Environment</label>

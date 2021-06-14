@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block panel_body %}
-{% if msg %}
-<p>{{ msg }}</p>
-{% endif %}
-{% if g.user %}
-Welcome to Cloud Toolset!
-{% else %}
-Welcome to Cloud Toolset! Please sign in to use any feature.
-{% endif %}
+<div class="panel-body text-center">
+    {% if g.user %}
+        Welcome to Cloud Toolset!
+    {% else %}
+        Welcome to Cloud Toolset!  Please sign in to use any feature.
+    {% endif %}
+</div>
 {% endblock %}

@@ -37,7 +37,7 @@ def azure_keyvaults():
             )
         except Exception as e:
             secret_value = "One or more of the following values is not correct."
-            print(e)
+            current_app.logger.error(e)
 
         return render_template("azure/keyvaults.html", secret_value=secret_value, envs=envs)
 

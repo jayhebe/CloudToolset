@@ -1,6 +1,6 @@
 import functools
 
-from flask import Blueprint, request, render_template, jsonify, session, g, url_for
+from flask import Blueprint, request, render_template, jsonify, session, g, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
@@ -23,7 +23,8 @@ def auth_register():
         db.session.add(user)
         db.session.commit()
 
-        return render_template("index/index.html", msg="注册成功")
+        flash("Register Successfully")
+        return render_template("index/index.html")
 
     return render_template("auth/register.html")
 
@@ -41,7 +42,8 @@ def auth_login():
 
             return redirect(url_for("index.index"))
         else:
-            return render_template("auth/login.html", msg="用户名或密码错误")
+            flash("Username or password is not correct")
+            return render_template("auth/login.html")
 
     return render_template("auth/login.html")
 
