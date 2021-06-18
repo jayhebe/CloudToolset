@@ -40,6 +40,7 @@ def auth_login():
             session.clear()
             session["user_id"] = user.user_id
 
+            flash("Login successfully")
             return redirect(url_for("index.index"))
         else:
             flash("Username or password is not correct")
