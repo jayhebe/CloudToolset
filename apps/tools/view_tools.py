@@ -28,6 +28,6 @@ def azure_get_tenant_id():
         for tenant in tenants:
             tenant_ids.append({"tenant_id": tenant.tenant_id})
     else:
-        tenant_ids.append({"tenant_id": "You do not have any tenant ID in this environment, please add one."})
+        tenant_ids.append({"tenant_id": "You don't have any tenant ID in this environment, please add one."})
 
     return jsonify(tenant_ids)

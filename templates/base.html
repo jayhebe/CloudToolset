@@ -28,7 +28,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Azure <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url_for('keyvaults.azure_keyvaults') }}">KeyVaults Secret Search</a></li>
+                        <li><a href="{{ url_for('keyvaults.azure_get_secret') }}">KeyVaults Secret Search</a></li>
                         <li><a href="#">KeyVaults Secret Management</a></li>
                         <li><a href="#">Service Principal Management</a></li>
                         <li role="separator" class="divider"></li>
@@ -84,7 +84,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Welcome, {{ g.user.email }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">User Center</a></li>
+                        <li><a href="#">User profile</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{ url_for('auth.auth_logout') }}">Logout</a></li>
                     </ul>
@@ -102,7 +102,7 @@
     <div class="col-lg-8 col-lg-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
-                {% block panel_heading %}{% endblock %}
+                <h5>{% block panel_heading %}{% endblock %}</h5>
             </div>
             <div class="panel-body">
                 {% block messages %}

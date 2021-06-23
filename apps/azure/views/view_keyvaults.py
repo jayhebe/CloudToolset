@@ -9,9 +9,9 @@ from apps.azure.utils.azure_keyvaults import get_kv_secret
 bp_keyvaults = Blueprint("keyvaults", __name__, url_prefix="/azure")
 
 
-@bp_keyvaults.route("/keyvaults", methods=["GET", "POST"])
+@bp_keyvaults.route("/secret_search", methods=["GET", "POST"])
 @auth_login_required
-def azure_keyvaults():
+def azure_get_secret():
     envs = Environment.query.all()
     tenants = Subscription.query.filter(Subscription.env_id == 1, Subscription.user_id == g.user.user_id).all()
 
@@ -41,6 +41,6 @@ def azure_keyvaults():
             secret_value = "One or more of the following values is not correct."
             current_app.logger.error(e)
 
-        return render_template("azure/keyvaults.html", secret_value=secret_value, envs=envs, tenants=tenants)
+        return render_template("azure/secret_search.html", secret_value=secret_value, envs=envs, tenants=tenants)
 
-    return render_template("azure/keyvaults.html", envs=envs, tenants=tenants)
+    return render_template("azure/secret_search.html", envs=envs, tenants=tenants)

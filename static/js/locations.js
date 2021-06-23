@@ -3,9 +3,8 @@ $("#environment").change(function() {
         "/tools/get_locations",
         {env_id: $("#environment").val()},
         function(data) {
-            console.log(data);
             $("#location").empty();
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 let location = data[i];
                 let $option = $("<option></option>");
                 $option.val(location.loc_id);
