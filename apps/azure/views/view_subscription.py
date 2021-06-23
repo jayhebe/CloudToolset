@@ -1,4 +1,5 @@
-from flask import Blueprint, request, render_template, jsonify, g, flash
+from flask import Blueprint, request, render_template, g, flash, url_for
+from werkzeug.utils import redirect
 
 from apps.auth.views.view_auth import auth_login_required
 from apps.azure.models.model_environment import Environment
@@ -9,9 +10,16 @@ from exts import db
 bp_subscription = Blueprint("subscription", __name__, url_prefix="/azure")
 
 
-@bp_subscription.route("/subscription", methods=["GET", "POST"])
+@bp_subscription.route("/subscription")
 @auth_login_required
 def azure_subscription():
+    subs = Subscription.query.filter(Subscription.user_id == g.user.user_id).all()
+    return render_template("/azure/subscription.html", subs=subs)
+
+
+@bp_subscription.route("/subscription_add", methods=["GET", "POST"])
+@auth_login_required
+def azure_subscription_add():
     envs = Environment.query.all()
     locations = Location.query.filter(Location.env_id == 1).order_by(Location.loc_full_name).all()
 
@@ -39,17 +47,6 @@ def azure_subscription():
         db.session.commit()
 
         flash("Saved successfully")
-        return render_template("azure/subscription.html", envs=envs, locations=locations)
+        return redirect(url_for("subscription.azure_subscription"))
 
-    return render_template("azure/subscription.html", envs=envs, locations=locations)
-
-
-@bp_subscription.route("/get_locations")
-def azure_get_locations():
-    loc_full_names = []
-    env_id = request.args.get("env_id")
-    locations = Location.query.filter(Location.env_id == env_id).order_by(Location.loc_full_name).all()
-    for location in locations:
-        loc_full_names.append({"loc_id": location.loc_id, "loc_full_name": location.loc_full_name})
-
-    return jsonify(loc_full_names)
+    return render_template("azure/subscription_add.html", envs=envs, locations=locations)

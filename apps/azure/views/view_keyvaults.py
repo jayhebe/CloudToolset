@@ -1,7 +1,8 @@
-from flask import Blueprint, request, render_template, current_app
+from flask import Blueprint, request, render_template, current_app, g
 
 from apps.auth.views.view_auth import auth_login_required
 from apps.azure.models.model_environment import Environment
+from apps.azure.models.model_subscription import Subscription
 from apps.azure.utils.azure_credential import get_credential
 from apps.azure.utils.azure_keyvaults import get_kv_secret
 
@@ -12,10 +13,11 @@ bp_keyvaults = Blueprint("keyvaults", __name__, url_prefix="/azure")
 @auth_login_required
 def azure_keyvaults():
     envs = Environment.query.all()
+    tenants = Subscription.query.filter(Subscription.env_id == 1, Subscription.user_id == g.user.user_id).all()
 
     if request.method == "POST":
-        tenant_id = current_app.config["TENANT_ID"]
         environment = request.form.get("environment")
+        tenant_id = request.form.get("tenant_id")
         client_id = request.form.get("client_id")
         client_secret = request.form.get("client_secret")
         keyvaults_name = request.form.get("keyvaults_name")
@@ -39,6 +41,6 @@ def azure_keyvaults():
             secret_value = "One or more of the following values is not correct."
             current_app.logger.error(e)
 
-        return render_template("azure/keyvaults.html", secret_value=secret_value, envs=envs)
+        return render_template("azure/keyvaults.html", secret_value=secret_value, envs=envs, tenants=tenants)
 
-    return render_template("azure/keyvaults.html", envs=envs)
+    return render_template("azure/keyvaults.html", envs=envs, tenants=tenants)

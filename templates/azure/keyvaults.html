@@ -20,6 +20,14 @@ KeyVaults Secret Search
         </select>
     </div>
     <div class="form-group">
+        <label for="tenant_id">Tenant ID</label>
+        <select class="form-control" name="tenant_id" id="tenant_id">
+            {% for tenant in tenants %}
+                <option value="{{ tenant.tenant_id }}">{{ tenant.tenant_id }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
         <label for="keyvaults_name">KeyVaults Name</label>
         <input type="text" class="form-control" id="keyvaults_name" name="keyvaults_name" placeholder="KeyVaults Name">
     </div>
@@ -38,4 +46,7 @@ KeyVaults Secret Search
 
     <button type="submit" class="btn btn-primary">Search</button>
 </form>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static', filename='js/tenantids.js') }}"></script>
 {% endblock %}

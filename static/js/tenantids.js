@@ -1,16 +1,16 @@
 $("#environment").change(function() {
     $.get(
-        "/tools/get_locations",
+        "/tools/get_tenant_id",
         {env_id: $("#environment").val()},
         function(data) {
             console.log(data);
-            $("#location").empty();
+            $("#tenant_id").empty();
             for (var i = 0; i < data.length; i++) {
-                let location = data[i];
+                let tenant_id = data[i];
                 let $option = $("<option></option>");
-                $option.val(location.loc_id);
-                $option.text(location.loc_full_name);
-                $option.appendTo($("#location"));
+                $option.val(tenant_id.tenant_id);
+                $option.text(tenant_id.tenant_id);
+                $option.appendTo($("#tenant_id"));
             }
         }
     );

@@ -2,51 +2,36 @@
 {% block panel_heading %}
 Subscription Management
 {% endblock %}
-{% block panel_body%}
-<form action="{{ url_for('subscription.azure_subscription') }}" method="post">
-    <div class="form-group">
-        <label for="environment">Environment</label>
-        <select class="form-control" name="environment" id="environment">
-            {% for env in envs %}
-            <option value="{{ env.env_id }}">{{ env.env_display_name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="tenant_id">Tenant ID</label>
-        <input type="text" class="form-control" id="tenant_id" name="tenant_id" placeholder="Tenant ID">
-    </div>
-    <div class="form-group">
-        <label for="subscription_id">Subscription ID</label>
-        <input type="text" class="form-control" id="subscription_id" name="subscription_id"
-               placeholder="Subscription ID">
-    </div>
-    <div class="form-group">
-        <label for="subscription_name">Subscription Name</label>
-        <input type="text" class="form-control" id="subscription_name" name="subscription_name"
-               placeholder="Subscription Name">
-    </div>
-    <div class="form-group">
-        <label for="location">Preferred Location</label>
-        <select class="form-control" name="location" id="location">
-            {% for location in locations %}
-            <option value="{{ location.loc_id }}">{{ location.loc_full_name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="application_id">Application ID</label>
-        <input type="text" class="form-control" id="application_id" name="application_id" placeholder="Application ID">
-    </div>
-    <div class="form-group">
-        <label for="application_key">Application Key</label>
-        <input type="password" class="form-control" id="application_key" name="application_key"
-               placeholder="Application Key">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+{% block panel_body %}
+<p class="text-right">
+    <a href="{{ url_for('subscription.azure_subscription_add') }}" class="btn btn-primary" role="button">Add New</a>
+</p>
 {% endblock %}
-{% block js %}
-<script src="{{ url_for('static', filename='js/locations.js') }}"></script>
+{% block panel_table %}
+<table class="table table-hover">
+    <tr>
+        <td>Subscription ID</td>
+        <td>Subscription Name</td>
+        <td>Environment</td>
+        <td>Preferred Location</td>
+        <td>Tenant ID</td>
+        <td>Appliation ID</td>
+    </tr>
+    {% if subs %}
+    {% for sub in subs %}
+    <tr>
+        <td>{{ sub.subscription_id }}</td>
+        <td>{{ sub.subscription_name }}</td>
+        <td>{{ sub.environment.env_name }}</td>
+        <td>{{ sub.location.loc_display_name }}</td>
+        <td>{{ sub.tenant_id }}</td>
+        <td>{{ sub.application_id }}</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td colspan="6">You don't have any subscription registered.</td>
+    </tr>
+    {% endif %}
+</table>
 {% endblock %}
