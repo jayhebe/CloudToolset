@@ -1,16 +1,9 @@
 {% extends "base.html" %}
 {% block panel_heading %}
-KeyVaults Secret Search
+Add New Keyvault
 {% endblock %}
 {% block panel_body%}
-{% if secret_value %}
-<div class="row">
-    <div class="panel-body text-center">
-        {{ secret_value }}
-    </div>
-</div>
-{% endif %}
-<form action="{{ url_for('keyvaults.azure_get_secret') }}" method="post">
+<form action="{{ url_for('keyvaults.azure_keyvault_add') }}" method="post">
     <div class="form-group">
         <label for="environment">Environment</label>
         <select class="form-control" name="environment" id="environment">
@@ -33,22 +26,10 @@ KeyVaults Secret Search
     </div>
     <div class="form-group">
         <label for="keyvault_name">KeyVault Name</label>
-        <input type="text" class="form-control" id="keyvault_name" name="keyvault_name" placeholder="KeyVault Name">
-    </div>
-    <div class="form-group">
-        <label for="secret_name">Secret Name</label>
-        <input type="text" class="form-control" id="secret_name" name="secret_name" placeholder="Secret Name">
-    </div>
-    <div class="form-group">
-        <label for="client_id">Client ID</label>
-        <input type="text" class="form-control" id="client_id" name="client_id" placeholder="Client ID">
-    </div>
-    <div class="form-group">
-        <label for="client_secret">Client Secret</label>
-        <input type="password" class="form-control" id="client_secret" name="client_secret" placeholder="Client Secret">
+        <input type="text" class="form-control" id="keyvault_name" name="keyvault_name" placeholder="KeyVaults Name">
     </div>
 
-    <button type="submit" class="btn btn-primary">Search</button>
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>
 {% endblock %}
 {% block js %}

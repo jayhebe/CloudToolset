@@ -1,7 +1,7 @@
 from flask import Flask
 
 from apps.auth.views.view_auth import bp_auth
-from apps.azure.views.view_keyvaults import bp_keyvaults
+from apps.azure.views.view_keyvault import bp_keyvaults
 from apps.azure.views.view_subscription import bp_subscription
 from apps.common.views.view_common import bp_common
 from apps.index.views.view_index import bp_index
