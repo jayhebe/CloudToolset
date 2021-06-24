@@ -29,7 +29,7 @@
                        aria-expanded="false">Azure <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('keyvaults.azure_get_secret') }}">KeyVaults Secret Search</a></li>
-                        <li><a href="#">KeyVaults Secret Management</a></li>
+                        <li><a href="{{ url_for('keyvaults.azure_get_all_secrets') }}">KeyVaults Secret Management</a></li>
                         <li><a href="#">Service Principal Management</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Resource Deployment</a></li>

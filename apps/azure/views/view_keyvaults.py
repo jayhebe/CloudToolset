@@ -44,3 +44,9 @@ def azure_get_secret():
         return render_template("azure/secret_search.html", secret_value=secret_value, envs=envs, tenants=tenants)
 
     return render_template("azure/secret_search.html", envs=envs, tenants=tenants)
+
+
+@bp_keyvaults.route("/secret_mgmt", methods=["GET", "POST"])
+@auth_login_required
+def azure_get_all_secrets():
+    pass
