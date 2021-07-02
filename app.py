@@ -1,3 +1,4 @@
+from flask import render_template
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 
@@ -15,6 +16,12 @@ manager = Manager(app=app)
 manager.add_command("db", MigrateCommand)
 
 migrate = Migrate(app=app, db=db)
+
+
+@app.errorhandler(404)
+def error404(e):
+    return render_template("errors/404.html"), 404
+
 
 if __name__ == "__main__":
     manager.run()

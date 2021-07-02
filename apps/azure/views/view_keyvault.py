@@ -121,6 +121,14 @@ def azure_keyvault_add():
                 db.session.add(keyvault_secret)
                 db.session.commit()
 
-        return redirect(url_for("keyvaults.azure_get_all_secrets"))
+        return redirect(url_for("keyvaults.azure_get_all_keyvaults"))
 
     return render_template("azure/keyvault_add.html", envs=envs, tenants=tenants)
+
+
+@bp_keyvaults.route("/keyvault_mgmt")
+@auth_login_required
+def azure_get_all_keyvaults():
+    keyvaults = Keyvault.query.filter(Keyvault.user_id == g.user.user_id).all()
+
+    return render_template("azure/keyvault_mgmt.html", keyvaults=keyvaults)

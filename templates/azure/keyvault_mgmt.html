@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block panel_heading %}
+Keyvaults Management
+{% endblock %}
+{% block panel_body %}
+<p class="text-right">
+    <a href="{{ url_for('keyvaults.azure_keyvault_add') }}" class="btn btn-primary" role="button">Add Keyvault</a>
+</p>
+{% endblock %}
+{% block panel_table %}
+<table class="table table-hover">
+    <thead>
+        <tr class="info">
+            <th>#</th>
+            <th>Keyvault Name</th>
+            <th>Tenant ID</th>
+            <th>Environment</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if keyvaults %}
+            {% for keyvault in keyvaults %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ keyvault.keyvault_name }}</td>
+                <td>{{ keyvault.tenant_id }}</td>
+                <td>{{ keyvault.environment.env_display_name }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="6">You don't have any keyvault discovered, add a Keyvault first.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
