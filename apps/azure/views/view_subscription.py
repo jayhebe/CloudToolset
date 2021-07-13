@@ -46,7 +46,7 @@ def azure_subscription_add():
         db.session.add(subscription)
         db.session.commit()
 
-        flash("Saved successfully")
+        flash("Saved successfully", category="successful")
         return redirect(url_for("subscription.azure_subscription"))
 
     return render_template("azure/subscription_add.html", envs=envs, locations=locations)

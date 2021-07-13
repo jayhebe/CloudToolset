@@ -23,7 +23,7 @@ def auth_register():
         db.session.add(user)
         db.session.commit()
 
-        flash("Register Successfully")
+        flash("Register Successfully", category="successful")
         return render_template("index/index.html")
 
     return render_template("auth/register.html")
@@ -40,10 +40,10 @@ def auth_login():
             session.clear()
             session["user_id"] = user.user_id
 
-            flash("Login successfully")
+            flash("Login successfully", category="successful")
             return redirect(url_for("index.index"))
         else:
-            flash("Username or password is not correct")
+            flash("Username or password is not correct", category="failed")
             return render_template("auth/login.html")
 
     return render_template("auth/login.html")

@@ -29,7 +29,8 @@
                        aria-expanded="false">Azure <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ url_for('keyvaults.azure_get_secret') }}">KeyVault Secret Search</a></li>
-                        <li><a href="{{ url_for('keyvaults.azure_get_all_secrets') }}">KeyVault Secret Management</a></li>
+                        <li><a href="{{ url_for('keyvaults.azure_get_all_secrets') }}">KeyVault Secret Management</a>
+                        </li>
                         <li><a href="{{ url_for('keyvaults.azure_get_all_keyvaults') }}">Keyvault Management</a></li>
                         <li><a href="#">Service Principal Management</a></li>
                         <li role="separator" class="divider"></li>
@@ -95,24 +96,24 @@
 {% block content %}
 <div class="row">
     <div class="col-lg-8 col-lg-offset-2">
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+            {% if category == "successful" %}
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% elif category == "failed" %}
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h5>{% block panel_heading %}{% endblock %}</h5>
             </div>
             <div class="panel-body">
-                {% block messages %}
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                        <div class="row">
-                            {% for message in messages %}
-                            <div class="panel-body text-center">
-                                {{ message }}
-                            </div>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-                    {% endwith %}
-                {% endblock %}
                 {% block panel_body %}
                 {% endblock %}
                 {% block panel_table %}
